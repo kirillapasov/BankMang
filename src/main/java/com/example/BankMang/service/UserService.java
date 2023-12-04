@@ -29,20 +29,17 @@ public class UserService {
     }
 
     public Optional<User> updateUser(String email, User updatedUser) {
-        // Дополнительная бизнес-логика, если необходимо
         Optional<User> existingUser = getUserByEmail(email);
         existingUser.ifPresent(user -> {
             user.setFirstName(updatedUser.getFirstName());
             user.setSecondName(updatedUser.getSecondName());
             user.setPhoneNumber(updatedUser.getPhoneNumber());
             user.setPassportData(updatedUser.getPassportData());
-            // Другие поля...
         });
         return existingUser;
     }
 
     public boolean deleteUser(String email) {
-        // Дополнительная бизнес-логика, если необходимо
         Optional<User> userToRemove = getUserByEmail(email);
         if (userToRemove.isPresent()) {
             users.remove(userToRemove.get());

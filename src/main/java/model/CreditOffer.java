@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CreditOffer {
+    private long id;
     private User user;
     private Credit credit;
     private long sum;
