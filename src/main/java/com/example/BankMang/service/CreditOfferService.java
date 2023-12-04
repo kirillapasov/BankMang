@@ -1,6 +1,10 @@
 package com.example.BankMang.service;
-import lombok.Data;
+
+import com.example.BankMang.model.Credit;
 import com.example.BankMang.model.CreditOffer;
+import com.example.BankMang.model.User;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,6 +16,14 @@ import java.util.Optional;
 public class CreditOfferService {
 
     private final List<CreditOffer> creditOffers = new ArrayList<>();
+    private final UserService userService;
+    private final CreditService creditService;
+
+    @Autowired
+    public CreditOfferService(UserService userService, CreditService creditService) {
+        this.userService = userService;
+        this.creditService = creditService;
+    }
 
     public List<CreditOffer> getAllCreditOffers() {
         return creditOffers;
@@ -25,6 +37,23 @@ public class CreditOfferService {
 
     public CreditOffer createCreditOffer(CreditOffer creditOffer) {
         creditOffer.setId(System.currentTimeMillis());
+
+        User user = userService.getUserById(creditOffer.getUser().getId());
+
+        Credit credit = creditService.getCreditById(creditOffer.getCredit().getId())
+                .orElseThrow(() -> new IllegalArgumentException("Credit not found"));
+
+        creditOffer.setUser(user);
+        creditOffer.setCredit(credit);
+
+        // Вызовите расчеты и обновление объекта CreditOffer
+        calculatePaymentSchedule(creditOffer);
+        creditOffer.setTotalInterestAmount(calculateTotalInterestAmount(creditOffer));
+        creditOffer.setMonthlyPayment(calculateMonthlyPayment(
+                creditOffer.getSum(),
+                creditOffer.getCredit().getInterestRate() / 100.0 / 12.0,
+                creditOffer.getPaymentSchedule()));
+
         creditOffers.add(creditOffer);
         return creditOffer;
     }
@@ -52,6 +81,7 @@ public class CreditOfferService {
         }
         return false;
     }
+
     private void calculatePaymentSchedule(CreditOffer creditOffer) {
         double monthlyInterestRate = creditOffer.getCredit().getInterestRate() / 100.0 / 12.0;
         double loanAmount = creditOffer.getSum();
@@ -102,10 +132,6 @@ public class CreditOfferService {
         return currentDate.plusMonths(paymentData + paymentNumber - 1);
     }
 
-    // ... остальной код ...
-
-    // Внутренний класс для представления информации о платежах
-
     @Data
     public static class Payment {
         private int paymentNumber;
@@ -114,7 +140,6 @@ public class CreditOfferService {
         private double principalAmount;
         private double interestAmount;
 
-        // геттеры и сеттеры
     }
 }
 

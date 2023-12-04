@@ -17,6 +17,8 @@ public class CreditOffer {
     private long paymentSum;
     private long loanRepaymentAmount;
     private long interestRepaymentAmount;
+    private double totalInterestAmount;
+    private double MonthlyPayment;
     private List<CreditOfferService.Payment> paymentScheduleList; // Добавлено поле для графика платежей
 
 }
