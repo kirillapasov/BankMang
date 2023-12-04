@@ -1,4 +1,4 @@
-package model;
+package com.example.BankMang.model;
 
 import com.example.BankMang.service.CreditOfferService;
 import lombok.Builder;

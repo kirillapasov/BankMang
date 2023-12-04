@@ -1,50 +1,37 @@
 package com.example.BankMang.service;
 
-import model.User;
+import com.example.BankMang.model.User;
 import org.springframework.stereotype.Service;
+import com.example.BankMang.repository.UserDao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
+    private final UserDao userDao;
 
-    private final List<User> users = new ArrayList<>();
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public Long createUser(User user) {
+        return userDao.createUser(user);
+    }
+
+    public User getUserById(Long userId) {
+        return userDao.getUserById(userId);
+    }
 
     public List<User> getAllUsers() {
-        return users;
+        return userDao.getAllUsers();
     }
 
-    public Optional<User> getUserByEmail(String email) {
-        return users.stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findFirst();
+    public User updateUser(Long userId, User updatedUser) {
+        return userDao.updateUser(userId, updatedUser);
     }
 
-    public User createUser(User user) {
-        // Дополнительная бизнес-логика, если необходимо
-        users.add(user);
-        return user;
-    }
+    public void deleteUser(Long userId) {
+        userDao.deleteUser(userId);
 
-    public Optional<User> updateUser(String email, User updatedUser) {
-        Optional<User> existingUser = getUserByEmail(email);
-        existingUser.ifPresent(user -> {
-            user.setFirstName(updatedUser.getFirstName());
-            user.setSecondName(updatedUser.getSecondName());
-            user.setPhoneNumber(updatedUser.getPhoneNumber());
-            user.setPassportData(updatedUser.getPassportData());
-        });
-        return existingUser;
-    }
-
-    public boolean deleteUser(String email) {
-        Optional<User> userToRemove = getUserByEmail(email);
-        if (userToRemove.isPresent()) {
-            users.remove(userToRemove.get());
-            return true;
-        }
-        return false;
     }
 }

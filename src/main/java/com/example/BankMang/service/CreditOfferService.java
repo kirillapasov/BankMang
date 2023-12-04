@@ -1,7 +1,6 @@
 package com.example.BankMang.service;
-import lombok.Builder;
 import lombok.Data;
-import model.CreditOffer;
+import com.example.BankMang.model.CreditOffer;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

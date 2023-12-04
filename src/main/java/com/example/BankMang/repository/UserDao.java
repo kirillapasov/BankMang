@@ -1,12 +1,14 @@
-package repository;
+package com.example.BankMang.repository;
 
 
-import model.User;
+import com.example.BankMang.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class UserDao {
     private static final List<User> users = new ArrayList<>();
     private static final AtomicLong userIdCounter = new AtomicLong(1);
@@ -29,13 +31,16 @@ public class UserDao {
         return new ArrayList<>(users);
     }
 
-    public void updateUser(User updatedUser) {
+    public User updateUser(Long userId, User updatedUser) {
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId().equals(updatedUser.getId())) {
+            if (users.get(i).getId().equals(userId)) {
+                // Найден пользователь с указанным id, обновляем его данные
                 users.set(i, updatedUser);
-                break;
+                return updatedUser;
             }
         }
+        // Если пользователь с указанным id не найден, возвращаем null
+        return null;
     }
 
     public void deleteUser(Long userId) {

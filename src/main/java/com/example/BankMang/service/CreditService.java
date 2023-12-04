@@ -1,6 +1,6 @@
 package com.example.BankMang.service;
 
-import model.Credit;
+import com.example.BankMang.model.Credit;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

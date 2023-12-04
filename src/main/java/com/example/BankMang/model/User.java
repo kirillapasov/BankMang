@@ -1,4 +1,4 @@
-package model;
+package com.example.BankMang.model;
 //Todo Добавить id в класс user
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +12,4 @@ public class User {
     private long phoneNumber;
     private long passportData;
     private Long id;
-    private String email;
-
-
-
 }

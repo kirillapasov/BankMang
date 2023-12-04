@@ -1,7 +1,7 @@
 package com.example.BankMang.controller;
 
 import com.example.BankMang.service.CreditService;
-import model.Credit;
+import com.example.BankMang.model.Credit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
