@@ -1,5 +1,4 @@
 package com.example.BankMang.model;
-//Todo Добавить id в класс user
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;

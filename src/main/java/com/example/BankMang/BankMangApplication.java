@@ -2,8 +2,8 @@ package com.example.BankMang;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//Todo Реализовать логику DAO.
 
+//Todo Добавить Front, добавить Хранение сущностей в БД
 @SpringBootApplication
 public class BankMangApplication {
 
