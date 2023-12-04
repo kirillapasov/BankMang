@@ -11,7 +11,7 @@ public class User {
     private String secondName;
     private long phoneNumber;
     private long passportData;
-    private long id;
+    private Long id;
     private String email;
 
 
