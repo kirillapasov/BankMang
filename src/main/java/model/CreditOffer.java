@@ -1,19 +1,22 @@
 package model;
 
+import com.example.BankMang.service.CreditOfferService;
 import lombok.Builder;
 import lombok.Data;
+import java.util.List;
 
 @Data
 @Builder
 public class CreditOffer {
-    private long id;
+    private Long id;
     private User user;
     private Credit credit;
     private long sum;
-    private int paymentSchedule; //График платежей
+    private int paymentSchedule;
     private short paymentData;
     private long paymentSum;
-    private long loanRepaymentAmount; //Сумма гашения тела кредита
-    private long InterestRepaymentAmount;//Сумма гашения процентов
+    private long loanRepaymentAmount;
+    private long interestRepaymentAmount;
+    private List<CreditOfferService.Payment> paymentScheduleList; // Добавлено поле для графика платежей
 
 }

@@ -1,5 +1,5 @@
 package model;
-
+//Todo Добавить id в класс user
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
@@ -11,8 +11,9 @@ public class User {
     private String secondName;
     private long phoneNumber;
     private long passportData;
-    @NonNull
+    private long id;
     private String email;
+
 
 
 }
