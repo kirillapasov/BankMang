@@ -8,4 +8,5 @@ import lombok.Data;
 public class Credit {
     private long creditLimit;
     private short interestRate;
+    private Long id;
 }
