@@ -46,8 +46,6 @@ public class CreditOfferService {
 
         creditOffer.setUser(user);
         creditOffer.setCredit(credit);
-
-        // Вызовите расчеты и обновление объекта CreditOffer
         calculatePaymentSchedule(creditOffer);
         creditOffer.setTotalInterestAmount(calculateTotalInterestAmount(creditOffer));
         creditOffer.setMonthlyPayment(calculateMonthlyPayment(
@@ -109,10 +107,9 @@ public class CreditOfferService {
             remainingLoanAmount -= principalPayment;
         }
 
-        creditOffer.setPaymentScheduleList(paymentSchedule); // Используем paymentScheduleList
+        creditOffer.setPaymentScheduleList(paymentSchedule);
     }
 
-    // Метод для автоматического расчета итоговой суммы процентов по кредиту
     private double calculateTotalInterestAmount(CreditOffer creditOffer) {
         double loanAmount = creditOffer.getSum();
         double totalInterestRate = creditOffer.getCredit().getInterestRate();
@@ -121,13 +118,11 @@ public class CreditOfferService {
         return loanAmount * totalInterestRate / 100.0 * paymentPeriods / 12.0;
     }
 
-    // Метод для автоматического расчета суммы ежемесячного платежа с учетом процентной ставки
     private double calculateMonthlyPayment(double loanAmount, double monthlyInterestRate, int paymentPeriods) {
         return loanAmount * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, paymentPeriods))
                 / (Math.pow(1 + monthlyInterestRate, paymentPeriods) - 1);
     }
 
-    // Метод для расчета даты платежа
     private LocalDate calculateDueDate(int paymentData, int paymentNumber) {
         LocalDate currentDate = LocalDate.now();
         return currentDate.plusMonths(paymentData + paymentNumber - 1);

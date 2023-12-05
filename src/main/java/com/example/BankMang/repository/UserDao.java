@@ -34,12 +34,10 @@ public class UserDao {
     public User updateUser(Long userId, User updatedUser) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getId().equals(userId)) {
-                // Найден пользователь с указанным id, обновляем его данные
                 users.set(i, updatedUser);
                 return updatedUser;
             }
         }
-        // Если пользователь с указанным id не найден, возвращаем null
         return null;
     }
 

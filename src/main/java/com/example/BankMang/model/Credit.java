@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class Credit {
     private long creditLimit;
-    private short interestRate;//процентная ставка
+    private short interestRate;
     private Long id;
 }
