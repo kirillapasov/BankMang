@@ -2,10 +2,11 @@ package com.example.BankMang.service;
 
 import com.example.BankMang.model.Credit;
 import com.example.BankMang.model.CreditOffer;
+import com.example.BankMang.model.Payment;
 import com.example.BankMang.model.User;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -131,15 +132,4 @@ public class CreditOfferService {
         LocalDate currentDate = LocalDate.now();
         return currentDate.plusMonths(paymentData + paymentNumber - 1);
     }
-
-    @Data
-    public static class Payment {
-        private int paymentNumber;
-        private LocalDate dueDate;
-        private double paymentAmount;
-        private double principalAmount;
-        private double interestAmount;
-
-    }
 }
-

@@ -1,6 +1,5 @@
 package com.example.BankMang.model;
 
-import com.example.BankMang.service.CreditOfferService;
 import lombok.Builder;
 import lombok.Data;
 import java.util.List;
@@ -19,6 +18,6 @@ public class CreditOffer {
     private long interestRepaymentAmount;
     private double totalInterestAmount;
     private double MonthlyPayment;
-    private List<CreditOfferService.Payment> paymentScheduleList; // Добавлено поле для графика платежей
+    private List<Payment> paymentScheduleList;
 
 }
